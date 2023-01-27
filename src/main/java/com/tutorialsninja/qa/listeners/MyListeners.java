@@ -1,9 +1,9 @@
 package com.tutorialsninja.qa.listeners;
-
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,9 +17,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.tutorialsninja.qa.utils.ExtentReporter;
 import com.tutorialsninja.qa.utils.Utilities;
+import com.util.JiraPolicy;
+import com.util.JiraServiceProvider;
 
 public class MyListeners implements ITestListener {
-	
+
 	ExtentReports extentReport;
 	ExtentTest extentTest;
 
@@ -61,8 +63,35 @@ public class MyListeners implements ITestListener {
 		extentTest.addScreenCaptureFromPath(destinationScreenshotPath);
 		extentTest.log(Status.INFO,result.getThrowable());
 		extentTest.log(Status.FAIL,result.getName()+" got failed");
-		
-	}
+
+
+		JiraPolicy jiraPolicy = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(JiraPolicy.class);
+			boolean isTicketReady = jiraPolicy.logTicketReady();
+			if (isTicketReady) {
+				// raise jira ticket:
+				System.out.println("is ticket ready for JIRA: " + isTicketReady);
+			
+				JiraServiceProvider jiraSp = new JiraServiceProvider("https://jira.vahanacloud.com",
+					"ganesh.timande@decimal.co.in", "Deep@27#1987", "RTB");
+				String issueSummary = result.getMethod().getConstructorOrMethod().getMethod().getName()+" "+ "Failed";
+						
+				String issueDescription = result.getThrowable().getMessage() + "\n";
+				issueDescription.concat(ExceptionUtils.getFullStackTrace(result.getThrowable()));
+				
+				String Methodname =result.getMethod().getConstructorOrMethod().getMethod().getName();
+				
+			
+					try {
+						jiraSp.createJiraTicket("Feature", issueSummary, issueDescription,Methodname);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();  
+					}
+			}
+					
+			
+		}
+	
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
@@ -85,6 +114,12 @@ public class MyListeners implements ITestListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+	}
+
+	@Override
+	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+		// TODO Auto-generated method stub
 		
 	}
 	

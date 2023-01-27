@@ -1,4 +1,4 @@
-package com.tutorialsninja.qa.base;
+package com.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,9 +13,11 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import com.tutorialsninja.qa.utils.Utilities;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class Base {
 	
-	WebDriver driver;
+	public static WebDriver driver;
 	public Properties prop;
 	public Properties dataProp;
 		
@@ -46,7 +48,7 @@ public class Base {
 	public WebDriver initializeBrowserAndOpenApplicationURL(String browserName) {
 			
 		if(browserName.equalsIgnoreCase("chrome")) {
-			
+		WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 			
 		}else if(browserName.equalsIgnoreCase("firefox")) {

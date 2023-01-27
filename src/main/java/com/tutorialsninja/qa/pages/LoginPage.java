@@ -7,19 +7,21 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 	
-	WebDriver driver;
+	public WebDriver driver;
 	
-	@FindBy(id="input-email")
+	@FindBy(id="email")
 	private WebElement emailAddressField;
 	
-	@FindBy(id="input-password")
+	@FindBy(xpath="//span[@class='mat-button-wrapper']")
+	private WebElement contiButton;
+	
+	@FindBy(id="password")
 	private WebElement passwordField;
 	
-	@FindBy(xpath="//input[@value='Login']")
+	@FindBy(id="loginButton")
 	private WebElement loginButton;
 	
-	@FindBy(xpath="//div[contains(@class,'alert-dismissible')]")
-	private WebElement emailPasswordNotMatchingWarning;
+
 	
 	public LoginPage(WebDriver driver) {
 		
@@ -28,39 +30,25 @@ public class LoginPage {
 		
 	}
 	
-	public void enterEmailAddress(String emailText) {
+	
+	public String validateLoginPageTitle1(){
+		return driver.getTitle();
+	}
+
+	
+	public AccountPage login(String emailText,String passwordText) throws InterruptedException {
 		
 		emailAddressField.sendKeys(emailText);
-		
-	}
-	
-	public void enterPassword(String passwordText) {
-		
+		Thread.sleep(2000);
+		contiButton.click();
+		Thread.sleep(1000);
 		passwordField.sendKeys(passwordText);
-		
-	}
-	
-	public AccountPage clickOnLoginButton() {
-		
+		Thread.sleep(2000);
 		loginButton.click();
 		return new AccountPage(driver);
 		
 	}
 	
-	public AccountPage login(String emailText,String passwordText) {
-		
-		emailAddressField.sendKeys(emailText);
-		passwordField.sendKeys(passwordText);
-		loginButton.click();
-		return new AccountPage(driver);
-		
-	}
 	
-	public String retrieveEmailPasswordNotMatchingWarningMessageText() {
-		
-		String warningText = emailPasswordNotMatchingWarning.getText();
-		return warningText;
-		
-	}
 
 }

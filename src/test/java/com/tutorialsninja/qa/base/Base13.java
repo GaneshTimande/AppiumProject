@@ -2,6 +2,7 @@ package com.tutorialsninja.qa.base;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -11,15 +12,16 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+
 import com.tutorialsninja.qa.utils.Utilities;
 
-public class Base {
+public class Base13 {
 	
 	WebDriver driver;
 	public Properties prop;
 	public Properties dataProp;
 		
-	public Base() {
+	public Base13() {
 		
 		prop = new Properties();
 		File propFile = new File(System.getProperty("user.dir")+"\\src\\main\\java\\com\\tutorialsninja\\qa\\config\\config.properties");
@@ -83,5 +85,3 @@ public class Base {
 	
 	
 }
-
-

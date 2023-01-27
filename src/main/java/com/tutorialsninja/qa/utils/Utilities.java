@@ -3,8 +3,11 @@ package com.tutorialsninja.qa.utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -15,11 +18,13 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.io.FileHandler;
 
-public class Utilities {
+import com.util.Base;
+
+public class Utilities extends Base {
 	
 	public static final int IMPLICIT_WAIT_TIME=10;
 	public static final int PAGE_LOAD_TIME=5;
-	
+	public String destinationScreenshotPath;
 	public static String generateEmailWithTimeStamp() {
 		
 		Date date = new Date();
@@ -30,6 +35,7 @@ public class Utilities {
 	
 	public static Object[][] getTestDataFromExcel(String sheetName) {
 		File excelFile = new File(System.getProperty("user.dir")+"\\src\\main\\java\\com\\tutorialsninja\\qa\\testdata\\TutorialsNinjaTestData.xlsx");
+		//C:\Users\Test\git\TutorialsNinjaHybridFrameworkRepo1\src\main\java\com\tutorialsninja\qa\testdata\TutorialsNinjaTestData.xlsx
 		XSSFWorkbook workbook = null;
 		try {
 			FileInputStream fisExcel = new FileInputStream(excelFile);
@@ -54,6 +60,7 @@ public class Utilities {
 				XSSFCell cell = row.getCell(j);
 				CellType cellType = cell.getCellType();
 				
+
 				switch(cellType) {
 				
 				case STRING:
@@ -78,9 +85,9 @@ public class Utilities {
 	}
 	
 	public static String captureScreenshot(WebDriver driver,String testName) {
-		
+		String dateName = new SimpleDateFormat("yyyyMMddhhmm").format(new Date());
 		File srcScreenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		String destinationScreenshotPath = System.getProperty("user.dir")+"\\Screenshots\\"+testName+".png";
+		String destinationScreenshotPath = System.getProperty("user.dir")+"\\Screenshots\\"+testName+dateName+".png";
 		
 		try {
 			FileHandler.copy(srcScreenshot,new File(destinationScreenshotPath));
@@ -90,5 +97,6 @@ public class Utilities {
 		
 		return destinationScreenshotPath;
 	}
+	
 	
 }
