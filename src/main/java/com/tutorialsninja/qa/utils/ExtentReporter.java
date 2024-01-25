@@ -36,13 +36,13 @@ public class ExtentReporter {
 			e.printStackTrace();
 		}
 		
-//		extentReport.setSystemInfo("Application URL",configProp.getProperty("url"));
-//		extentReport.setSystemInfo("Browser Name",configProp.getProperty("browserName"));
-//		extentReport.setSystemInfo("Email",configProp.getProperty("validEmail"));
-//		extentReport.setSystemInfo("Password",configProp.getProperty("validPassword"));
-//		extentReport.setSystemInfo("Operating System",System.getProperty("os.name"));
-//		extentReport.setSystemInfo("Username",System.getProperty("user.name"));
-//		extentReport.setSystemInfo("Java Version",System.getProperty("java.version"));
+		extentReport.setSystemInfo("Application URL",configProp.getProperty("url"));
+		extentReport.setSystemInfo("Browser Name",configProp.getProperty("browserName"));
+		//extentReport.setSystemInfo("Email",configProp.getProperty("validEmail"));
+		//extentReport.setSystemInfo("Password",configProp.getProperty("validPassword"));
+		extentReport.setSystemInfo("Operating System",System.getProperty("os.name"));
+		extentReport.setSystemInfo("Username",System.getProperty("user.name"));
+		extentReport.setSystemInfo("Java Version",System.getProperty("java.version"));
 		
 		return extentReport;
 	}

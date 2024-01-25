@@ -6,7 +6,10 @@
   </listeners>
   <test thread-count="5" name="Test">
     <classes>
-      <class name="com.tutorialsninja.qa.testcases.LoginTest"/>
+<!--       <class name="com.qa.testcases.LoginPageTest"/> -->
+<!--       <class name="com.qa.testcases.HomePageTest"/> -->
+   <class name="com.qa.testcases.DashBoardPageTest"/>
+   
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

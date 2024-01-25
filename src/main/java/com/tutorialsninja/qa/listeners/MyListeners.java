@@ -37,7 +37,9 @@ public class MyListeners implements ITestListener {
 		
 		extentTest = extentReport.createTest(result.getName());
 		extentTest.log(Status.INFO,result.getName()+" started executing");
-		
+		extentTest.assignDevice("Mobile");
+		 extentTest.assignAuthor("Ganesh");
+		 extentTest.assignCategory("Smoke");
 	}
 
 	@Override
@@ -64,7 +66,7 @@ public class MyListeners implements ITestListener {
 		extentTest.log(Status.INFO,result.getThrowable());
 		extentTest.log(Status.FAIL,result.getName()+" got failed");
 
-
+		
 		JiraPolicy jiraPolicy = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(JiraPolicy.class);
 			boolean isTicketReady = jiraPolicy.logTicketReady();
 			if (isTicketReady) {

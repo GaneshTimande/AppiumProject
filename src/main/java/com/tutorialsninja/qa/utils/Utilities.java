@@ -2,12 +2,12 @@ package com.tutorialsninja.qa.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -17,10 +17,15 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.io.FileHandler;
+import com.util.Base1;
 
-import com.util.Base;
 
-public class Utilities extends Base {
+
+
+
+
+
+public class Utilities extends Base1 {
 	
 	public static final int IMPLICIT_WAIT_TIME=10;
 	public static final int PAGE_LOAD_TIME=5;
@@ -35,7 +40,7 @@ public class Utilities extends Base {
 	
 	public static Object[][] getTestDataFromExcel(String sheetName) {
 		File excelFile = new File(System.getProperty("user.dir")+"\\src\\main\\java\\com\\tutorialsninja\\qa\\testdata\\TutorialsNinjaTestData.xlsx");
-		//C:\Users\Test\git\TutorialsNinjaHybridFrameworkRepo1\src\main\java\com\tutorialsninja\qa\testdata\TutorialsNinjaTestData.xlsx
+		
 		XSSFWorkbook workbook = null;
 		try {
 			FileInputStream fisExcel = new FileInputStream(excelFile);
@@ -73,6 +78,13 @@ public class Utilities extends Base {
 					data[i][j] = cell.getBooleanCellValue();
 					break;	
 		
+				case ERROR:
+					data[i][j] = cell.getErrorCellString();
+					break;	
+					
+
+				
+					
 				}
 				
 			}
@@ -84,6 +96,7 @@ public class Utilities extends Base {
 		
 	}
 	
+
 	public static String captureScreenshot(WebDriver driver,String testName) {
 		String dateName = new SimpleDateFormat("yyyyMMddhhmm").format(new Date());
 		File srcScreenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
@@ -97,6 +110,8 @@ public class Utilities extends Base {
 		
 		return destinationScreenshotPath;
 	}
-	
+
+
+
 	
 }

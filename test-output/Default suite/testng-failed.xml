@@ -3,13 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.tutorialsninja.qa.testcases.LoginTest">
+      <class name="com.qa.testcases.DashBoardPageTest">
         <methods>
-          <include name="setup"/>
-          <include name="verifyLoginWithValidCredentials" invocation-numbers="1 2"/>
-          <include name="tearDown"/>
+          <include name="verifyContactsPageLabel"/>
+          <include name="setUp"/>
         </methods>
-      </class> <!-- com.tutorialsninja.qa.testcases.LoginTest -->
+      </class> <!-- com.qa.testcases.DashBoardPageTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

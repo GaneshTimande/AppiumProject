@@ -22,7 +22,7 @@ public class SendEmailJava {
 		
 		EmailAttachment attachment = new EmailAttachment();
 		try {
-			attachment.setURL(new URL("file:///C:/Users/Test/git/TutorialsNinjaHybridFrameworkRepo1/test-output/ExtentReports/extentReport.html"));
+			attachment.setURL(new URL("file:///C:/Users/Test/eclipse-workspace/Appium20sept/test-output/ExtentReports/extentReport.html"));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,17 +35,17 @@ public class SendEmailJava {
 		MultiPartEmail email = new MultiPartEmail();
 		email.setHostName("smtp.googlemail.com");
 		email.setSmtpPort(465);
-		email.setAuthenticator(new DefaultAuthenticator("ganesh.timande@decimal.co.in", "hjkm mise tlur enpl"));
+		email.setAuthenticator(new DefaultAuthenticator("ganesh.timande@decimal.co.in", "vtlb zluf lnlt kwwj"));
 		email.setSSLOnConnect(true);
 		try {
-			//email.setFrom("ganesh.timande@decimal.co.in");
-			email.setFrom("timandeganesh27@gmail.com");
+			email.setFrom("ganesh.timande@decimal.co.in");
+		//	email.setFrom("timandeganesh27@gmail.com");
 		} catch (EmailException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		email.setSubject("TestMail");
-		email.setMsg("file:///C:/Users/Test/git/TutorialsNinjaHybridFrameworkRepo1/test-output/ExtentReports/extentReport.html");
+		email.setMsg("file:///C:/Users/Test/eclipse-workspace/Appium20sept/test-output/ExtentReports/extentReport.html");
 		email.addTo("ganesh.timande@decimal.co.in");
 		email.addTo("timandeganesh27@gmail.com");
 
@@ -54,7 +54,7 @@ public class SendEmailJava {
 
 		// send the email
        email.send();
-		System.out.println("email send"); 
+		System.out.println("Email Send"); 
 	}
 }
 

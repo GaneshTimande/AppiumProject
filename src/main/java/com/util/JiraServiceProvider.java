@@ -42,7 +42,7 @@ import net.rcarz.jiraclient.greenhopper.SprintIssue;
 import net.rcarz.jiraclient.greenhopper.SprintReport;
 
 
-public class JiraServiceProvider extends Base  {
+public class JiraServiceProvider extends Base1  {
 
 	private static final RestClient RestClient = null;
 	public JiraClient jira;
